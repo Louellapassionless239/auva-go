@@ -12,12 +12,16 @@ interface ShortenResult {
     domain: string;
 }
 
+interface ShortenFormProps {
+    onSuccess?: () => void;
+}
+
 const DOMAINS = [
     { value: "go.auva.dev", label: "go.auva.dev" },
     { value: "auva.site", label: "auva.site" },
 ] as const;
 
-export function ShortenForm() {
+export function ShortenForm({ onSuccess }: ShortenFormProps = {}) {
     const [destination, setDestination] = useState("");
     const [customSlug, setCustomSlug] = useState("");
     const [domain, setDomain] = useState<string>("go.auva.dev");
@@ -78,6 +82,7 @@ export function ShortenForm() {
             setCustomSlug("");
             setExpiresAt("");
             toast.success("Short link created!");
+            onSuccess?.();
         } catch {
             toast.error("Something went wrong");
         } finally {

@@ -111,7 +111,7 @@ export function DashboardContent() {
             {/* Create new link */}
             <div className="rounded-lg border bg-[hsl(var(--card))] p-6">
                 <h2 className="text-lg font-semibold mb-4">Create a new link</h2>
-                <ShortenForm />
+                <ShortenForm onSuccess={() => fetchLinks(1)} />
             </div>
 
             {/* Links table */}

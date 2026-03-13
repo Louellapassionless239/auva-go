@@ -52,6 +52,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [accessToken, setAccessToken] = useState("");
     const [loading, setLoading] = useState(true);
 
+    const setTokenCookie = (token: string) => {
+        // 13-minute lifetime matches the auto-refresh interval
+        document.cookie = `auva_token=${token}; path=/; SameSite=Lax; max-age=${13 * 60}`;
+    };
+
+    const clearTokenCookie = () => {
+        document.cookie = "auva_token=; path=/; max-age=0";
+    };
+
     const refresh = useCallback(async () => {
         try {
             const res = await fetch(`${AUTH_API}/auth/refresh`, {
@@ -63,9 +72,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const token = data.accessToken as string;
             const decoded = decodeToken(token);
             if (!decoded) throw new Error();
+            setTokenCookie(token);
             setAccessToken(token);
             setUser(decoded);
         } catch {
+            clearTokenCookie();
             setAccessToken("");
             setUser(null);
         }
@@ -90,6 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 credentials: "include",
             });
         } catch { /* ignore */ }
+        clearTokenCookie();
         setAccessToken("");
         setUser(null);
     }, []);
