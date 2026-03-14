@@ -166,10 +166,10 @@ export function Header() {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <a href="https://account.auva.dev/login" className="rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-500/10 dark:text-neutral-300 transition-colors">
+                  <a href={`https://account.auva.dev/login?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.origin + "/" : "https://go.auva.dev")}`} className="rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-500/10 dark:text-neutral-300 transition-colors">
                     Sign in
                   </a>
-                  <a href="https://account.auva.dev/register" className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 transition-colors">
+                  <a href={`https://account.auva.dev/register?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.origin + "/" : "https://go.auva.dev")}`} className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 transition-colors">
                     Sign up
                   </a>
                 </div>

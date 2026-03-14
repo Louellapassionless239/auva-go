@@ -55,7 +55,7 @@ export default function HomePage() {
                     </p>
                     <div className="flex items-center justify-center gap-3">
                         <a
-                            href="https://account.auva.dev/register"
+                            href={`https://account.auva.dev/register?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "https://go.auva.dev")}`}
                             className={cn(
                                 "inline-flex h-10 items-center rounded-lg bg-brand-600 px-6 text-sm font-medium text-white",
                                 "hover:bg-brand-700 transition-colors focus-ring"
@@ -64,7 +64,7 @@ export default function HomePage() {
                             Sign up free
                         </a>
                         <a
-                            href="https://account.auva.dev/login"
+                            href={`https://account.auva.dev/login?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "https://go.auva.dev")}`}
                             className={cn(
                                 "inline-flex h-10 items-center rounded-lg border border-brand-300 dark:border-brand-700 px-6 text-sm font-medium",
                                 "hover:bg-brand-100 dark:hover:bg-brand-900 transition-colors focus-ring"

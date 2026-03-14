@@ -32,7 +32,10 @@ export function middleware(request: NextRequest) {
     if (pathname.startsWith("/dashboard")) {
         const token = request.cookies.get("auva_token")?.value;
         if (!hasValidAccessToken(token)) {
-            return NextResponse.redirect(ACCOUNT_LOGIN_URL, 302);
+            const returnUrl = new URL(request.url);
+            const loginUrl = new URL(ACCOUNT_LOGIN_URL);
+            loginUrl.searchParams.set("redirect", returnUrl.href);
+            return NextResponse.redirect(loginUrl.href, 302);
         }
     }
 

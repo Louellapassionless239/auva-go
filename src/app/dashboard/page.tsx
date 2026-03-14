@@ -11,7 +11,7 @@ export default function DashboardPage() {
     useEffect(() => {
         if (loading) return;
         if (!user) {
-            window.location.href = "https://account.auva.dev/login";
+            window.location.href = `https://account.auva.dev/login?redirect=${encodeURIComponent(typeof window !== "undefined" ? window.location.href : "https://go.auva.dev")}`;
             return;
         }
         router.replace("/");
